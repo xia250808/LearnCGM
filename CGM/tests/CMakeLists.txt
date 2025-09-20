@@ -1,13 +1,12 @@
 ﻿# tests/CMakeLists.txt
 # 启用 CTest（测试运行器）
+include(CTest)
 enable_testing()
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug)
 endif()
 project("cgm_test")
-add_executable(cgm_test 
-    "mat/mat4_test.cpp"
-)
+add_executable(cgm_test  "main.cpp")
 
 target_link_libraries(cgm_test PRIVATE 
     CGM  # 主库名（与 add_library 定义的名称一致）
@@ -15,6 +14,6 @@ target_link_libraries(cgm_test PRIVATE
 
 add_test(
     NAME mat4_test
-    COMMAND cgm_test
+    COMMAND mat4_test
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
-include(CTest)

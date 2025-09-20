@@ -22,12 +22,6 @@ add_library(CGM STATIC ${CGM_SOURCES})
 target_include_directories(CGM PUBLIC 
     "${CMAKE_SOURCE_DIR}/include"  # 公共头文件目录
 )
-
-# 4. 可选：打印调试信息（验证路径是否正确）
-message(STATUS "源文件列表：${CGM_SOURCES}")
-message(STATUS "CMAKE_SOURCE_DIR：${CMAKE_SOURCE_DIR}")
-
-
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET CGM PROPERTY CXX_STANDARD 20)
 endif()
