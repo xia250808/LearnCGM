@@ -10,8 +10,6 @@ if (POLICY CMP0141)
 endif()
 
 project ("CGM")
-# 打印 CMAKE_SOURCE_DIR（配置阶段可见）
-message(STATUS "CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
 add_subdirectory(tests)
 # 1. 递归收集所有 .cpp 文件（包括子目录）
 file(GLOB_RECURSE CGM_SOURCES 
@@ -23,7 +21,6 @@ add_library(CGM STATIC ${CGM_SOURCES})
 
 target_include_directories(CGM PUBLIC 
     "${CMAKE_SOURCE_DIR}/include"  # 公共头文件目录
-    "${CMAKE_SOURCE_DIR}/src"      # 源文件与头文件同目录时（可选）
 )
 
 # 4. 可选：打印调试信息（验证路径是否正确）
