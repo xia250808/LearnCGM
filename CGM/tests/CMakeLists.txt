@@ -11,9 +11,3 @@ add_executable(cgm_test  "main.cpp")
 target_link_libraries(cgm_test PRIVATE 
     CGM  # 主库名（与 add_library 定义的名称一致）
 )
-
-add_test(
-    NAME mat4_test
-    COMMAND mat4_test
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
