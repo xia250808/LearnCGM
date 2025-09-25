@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "mat/mat3.h"
 using namespace std;
 
 
@@ -13,6 +14,8 @@ struct Eul {
 	RotationOrder order;
 	const float epsilon = 1e-6f;
 	void print();
-	Eul(float p = 0, float y = 0, float r = 0, RotationOrder o = RotationOrder::YXZ): pitch(p), yaw(y), roll(r),order(o) {}
+	Eul(float y = 0,float p = 0, float r = 0, RotationOrder o = RotationOrder::YXZ): yaw(y), pitch(p), roll(r),order(o) {}
 	float normalize_angle(float angle);
+	Mat3 transToMat3();
+
 };

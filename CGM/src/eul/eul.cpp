@@ -17,9 +17,9 @@ std::ostream& operator<<(std::ostream& os, RotationOrder order) {
 	return os;
 }
 void Eul::print() {
-	cout << "epsilon = " << this->epsilon << endl;
-	cout << "pitch = " << this->pitch << endl;
+	cout << "Rotaion order: "<< endl;
 	cout << "yaw = " << this->yaw << endl;
+	cout << "pitch = " << this->pitch << endl;
 	cout << "roll = " << this->roll << endl;
 	cout << "rotation order = " << this->order << endl;
 }
@@ -31,4 +31,28 @@ float Eul::normalize_angle(float angle) {
 	if (angle < -pi + this->epsilon) angle += 2 * pi;
 
 	return angle;
+}
+// M=R*P*Y
+Mat3 Eul::transToMat3() {
+	float p = normalize_angle(pitch);
+	float y = normalize_angle(yaw);
+	float r = normalize_angle(roll);
+	float cp = cosf(p), sp = sinf(p);
+	float cy = cosf(y), sy = sinf(y);
+	float cr = cosf(r), sr = sinf(r);
+
+	Mat3 retMat3 = Mat3();
+
+	retMat3.mat[0][0] = cy * cr + sy * sp * sr;
+	retMat3.mat[0][1] = sr * cp;
+	retMat3.mat[0][2] = -sy * cr + cy * sp * sr;
+	retMat3.mat[1][0] = -cy * sr + sy * sp * cr;
+	retMat3.mat[1][1] = cr * cp;
+	retMat3.mat[1][2] = sr * sy + cy * sp * cr;
+	retMat3.mat[2][0] = sy * cp;
+	retMat3.mat[2][1] = -sp;
+	retMat3.mat[2][2] = cy * cp;
+
+	return retMat3;
+
 }
