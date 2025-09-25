@@ -14,7 +14,7 @@ struct Eul {
 	RotationOrder order;
 	const float epsilon = 1e-6f;
 	void print();
-	Eul(float y = 0,float p = 0, float r = 0, RotationOrder o = RotationOrder::YXZ): yaw(y), pitch(p), roll(r),order(o) {}
+	Eul(float y = 0,float x = 0, float z = 0, RotationOrder o = RotationOrder::YXZ): yaw(y), pitch(x), roll(z),order(o) {}
 	float normalize_angle(float angle);
 	Mat3 transToMat3();
 
