@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <iostream>
 #include <array>
+#include "eul/eul.h"
+
+class Eul;
 using namespace std;
 struct ColumItems
 {
@@ -24,5 +27,6 @@ public:
     std::array<float,row> getColumItems(int coum)const;
     void print(const std::string& str);
     float getMat3Determinant();
+    Eul transToEul();
 
 };

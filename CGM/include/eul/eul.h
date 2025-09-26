@@ -6,7 +6,7 @@ using namespace std;
 
 enum class RotationOrder { XYZ, YZX, ZXY, XZY, YXZ, ZYX };
 std::ostream& operator<<(std::ostream& os, RotationOrder order);
-
+class Mat3;
 struct Eul {
 	float pitch;
 	float yaw;
