@@ -3,7 +3,7 @@
 #include <array>
 #include "eul/eul.h"
 
-class Eul;
+struct Eul;
 using namespace std;
 struct ColumItems
 {
