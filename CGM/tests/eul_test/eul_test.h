@@ -1,8 +1,8 @@
 #define GLM_ENABLE_EXPERIMENTAL
-#include "eul/eul.h"
-#include "mat/mat3.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/euler_angles.hpp>
+#include "eul/eul.h"
+#include "mat/mat3.h"
 #include "utill/utill.h"
 
 class eul_test {
@@ -32,7 +32,7 @@ public:
 		printMat(rotationMatrix);
 		Mat3 Mat3B = Utill::transGlmMat4ToMat3(rotationMatrix);
 		std::string isEqual = (Mat3A == Mat3B) ? "equal" : "no euqal";
-		cout << isEqual << endl;
+		cout << "my program result " << isEqual <<" glm result" << endl;
 		Mat3B.transToEul().print();
 	}
 };

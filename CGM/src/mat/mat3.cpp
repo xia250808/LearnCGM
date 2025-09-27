@@ -24,7 +24,6 @@ void Mat3::print(const std::string& str) {
             cout << mat[i][j] << "\t";
         }
         cout << endl;
-        cout << endl;
 
     }
 }
@@ -74,10 +73,10 @@ Eul Mat3::transToEul() {
     float y;
     float r;
     float sp = -mat[2][1];
-    if (sp<=-1.0f){
+    if (sp <= -1.0f){
 
         p = -numbers::pi / 2;
-    }else if(sp>= 1.0f){
+    }else if(sp >= 1.0f){
 
         p = numbers::pi / 2;
 
@@ -85,7 +84,7 @@ Eul Mat3::transToEul() {
 
         p = asin(sp);
     }
-    if (fabs(sp)> 0.9999f)
+    if (fabs(sp) > 0.9999f)
     {
         r = 0.0f;
         y = atan2(mat[0][2], mat[0][0]);
