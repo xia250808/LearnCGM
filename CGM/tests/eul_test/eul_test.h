@@ -3,6 +3,8 @@
 #include "mat/mat3.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/euler_angles.hpp>
+#include "utill/utill.h"
+
 class eul_test {
 public:
 
@@ -16,16 +18,6 @@ public:
 		}
 	}
 
-	static Mat3 toMat3(const glm::mat4& m) {
-		Mat3 retMat = Mat3();
-		for (int i = 0; i < 3; ++i)
-		{
-			for (int j = 0; j < 3; ++j) {
-				retMat.set(i,j,m[i][j]);
-			}
-		}
-		return retMat;
-	}
 	static void print_test() {
 		/*
 		
@@ -35,12 +27,12 @@ public:
 		*/
 		Eul eulA = Eul(glm::radians(65.0f), glm::radians(24.0f), glm::radians(42.0f));
 		eulA.print();
-		// R P Y => Z X Y
-		eulA.transToMat3().print("eulA.transToMat3");
+		Mat3 Mat3A = eulA.transToMat3();
 		glm::mat4 rotationMatrix = glm::eulerAngleYXZ(glm::radians(65.0f), glm::radians(24.0f), glm::radians(42.0f));
 		printMat(rotationMatrix);
-		Mat3 B =toMat3(rotationMatrix);
-		B.print("MAT3 :");
-		B.transToEul().print();
+		Mat3 Mat3B = Utill::transGlmMat4ToMat3(rotationMatrix);
+		std::string isEqual = (Mat3A == Mat3B) ? "equal" : "no euqal";
+		cout << isEqual << endl;
+		Mat3B.transToEul().print();
 	}
 };
