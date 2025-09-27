@@ -8,7 +8,7 @@ private:
 
 public:
 	static Mat3 CreateRotationMat3AroundAxis(const Vec3& axis, float angleRadians);
-	static Mat3 CreateScalingMat3longAxis(const Vec3& axis, float k);
+	static Mat3 CreateScalingMat3AlongAxis(const Vec3& axis, float k);
 	// 这里的axis是该平面的法线
 	static Mat3 CreateReflectionMat3OverPlane(const Vec3& axis);
 	

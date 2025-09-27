@@ -25,7 +25,7 @@ Mat3 Transform::CreateRotationMat3AroundAxis(const Vec3& axis, float angleRadian
     return rotationMat3;
 }
 
-Mat3 Transform::CreateScalingMat3longAxis(const Vec3& axis, float scaleFactor) {
+Mat3 Transform::CreateScalingMat3AlongAxis(const Vec3& axis, float scaleFactor) {
     Vec3 axisNormalized = axis.normalized();
     //数学原理
     /*沿任意单位向量 k = (kx, ky, kz)的缩放矩阵 S可通过以下公式推导：
@@ -53,11 +53,11 @@ Mat3 Transform::CreateScalingMat3longAxis(const Vec3& axis, float scaleFactor) {
 
 Mat3 Transform::CreateReflectionMat3OverPlane(const Vec3& axis) {
 
-    return CreateScalingMat3longAxis(axis, -1);
+    return CreateScalingMat3AlongAxis(axis, -1);
 }
 
 Mat3 Transform::CreateOrthographicProjectionMat3AlongDirection(const Vec3& axis){
-    return CreateScalingMat3longAxis(axis, 0);
+    return CreateScalingMat3AlongAxis(axis, 0);
 }
 
 Mat4 Transform::Create4x4AffineMatrixFrom3x3(const Mat3& M3x3, const Vec3& translation) {

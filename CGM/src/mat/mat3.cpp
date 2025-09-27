@@ -1,6 +1,7 @@
 ﻿#include <cmath>
 #include <array>
 #include "mat/mat3.h"
+#include <numbers>
 
 using namespace std;
 
@@ -40,6 +41,23 @@ std::array<float, 3> Mat3::getColumItems(int colum)const {
     return { get(0,colum),get(1,colum),get(2,colum) };
 }
 
+bool Mat3::operator==(const Mat3& other) const {
+    bool isEqual = true;
+    for (int i = 0; i < Mat3::row; i++)
+    {
+        for (int j = 0; j < Mat3::colum; j++)
+        {
+            isEqual = fabs(mat[i][j] - other.mat[i][j]) < Mat3::epsilon;
+            if (!isEqual)
+            {
+                return isEqual;
+            }
+        }
+
+    }
+    return isEqual;
+}
+
 float Mat3::getMat3Determinant() {
     float M00[4] = { mat[1][1],mat[1][2],mat[2][1],mat[2][2] };
     float M01[4] = { mat[1][0],mat[1][2],mat[2][0],mat[2][2] };
@@ -49,4 +67,31 @@ float Mat3::getMat3Determinant() {
     float c02 = mat[0][2] * get2x2Determinant(M02);
     float determinant = c00 + c01 + c02;
     return determinant;
+}
+
+Eul Mat3::transToEul() {
+    float p;
+    float y;
+    float r;
+    float sp = -mat[2][1];
+    if (sp<=-1.0f){
+
+        p = -numbers::pi / 2;
+    }else if(sp>= 1.0f){
+
+        p = numbers::pi / 2;
+
+    }else {
+
+        p = asin(sp);
+    }
+    if (fabs(sp)> 0.9999f)
+    {
+        r = 0.0f;
+        y = atan2(mat[0][2], mat[0][0]);
+    } else {
+        y = atan2(mat[2][0], mat[2][2]);
+        r = atan2(mat[0][1], mat[1][1]);
+    }
+    return Eul(y, p, r);
 }
