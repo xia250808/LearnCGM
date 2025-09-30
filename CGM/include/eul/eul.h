@@ -20,4 +20,5 @@ struct Eul {
 	float normalize_angle(float angle);
 	Mat3 transToMat3();
 	Quater transToQuater();
+	bool operator==(const Eul& other);
 };

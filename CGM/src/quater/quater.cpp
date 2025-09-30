@@ -1,5 +1,6 @@
 #include <array>
 #include "quater/quater.h"
+#include <numbers>
 
 Quater::Quater()
 {
@@ -44,4 +45,23 @@ Mat3 Quater::transToMat3()
 	retMat3.mat[2][2] = 1 - 2 * x * x - 2 * y * y;
 
 	return retMat3;
+}
+
+Eul Quater::transToEul() {
+
+	float yaw, pitch, roll;
+	float sp = -2.0f * (y * z - w * x);
+	if (sp>0.9999f)
+	{
+		pitch = numbers::pi / 2.0;
+		roll = 0.0f;
+		yaw = atan2(w * y - x * z, 0.5f - y * y - z * z);
+	}
+	else
+	{
+		pitch = asin(sp);
+		roll = atan2(x * y + w * z, 0.5 - x * x - z * z);
+		yaw = atan2(x * z + w * y, 0.5f - x * x - y * y);
+	}
+	return Eul(yaw, pitch, roll);
 }

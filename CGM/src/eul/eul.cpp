@@ -73,3 +73,8 @@ Quater Eul::transToQuater()
 
 	return retQuater;
 }
+
+bool Eul::operator==(const Eul& other)
+{
+	return fabs(pitch - other.pitch) < 1e-6f && fabs(yaw - other.yaw) < 1e-6f && fabs(roll - other.roll) < 1e-6f;
+}

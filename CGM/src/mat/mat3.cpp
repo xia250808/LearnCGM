@@ -1,6 +1,7 @@
 ﻿#include <cmath>
 #include <array>
 #include "mat/mat3.h"
+#include "quater/quater.h"
 #include <numbers>
 
 using namespace std;
@@ -76,6 +77,10 @@ float Mat3::getMat3Determinant() {
     float c02 = mat[0][2] * get2x2Determinant(M02);
     float determinant = c00 + c01 + c02;
     return determinant;
+}
+
+Quater Mat3::transToQuater() {
+
 }
 
 Eul Mat3::transToEul() {

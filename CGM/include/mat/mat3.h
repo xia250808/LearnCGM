@@ -2,8 +2,10 @@
 #include <iostream>
 #include <array>
 #include "eul/eul.h"
+#include "quater/quater.h"
 
 struct Eul;
+struct Quater;
 using namespace std;
 struct ColumItems
 {
@@ -30,5 +32,6 @@ public:
     void print(const std::string& str);
     float getMat3Determinant();
     Eul transToEul();
+    Quater transToQuater();
     bool operator==(const Mat3& other) const;
 };
