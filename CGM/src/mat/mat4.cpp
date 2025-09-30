@@ -1,21 +1,22 @@
 ﻿#include "mat/mat4.h"
 using namespace std;
 
-Mat4::Mat4(std::array<float, row> row1, std::array<float, row> row2,
-    std::array<float, row>  row3, std::array<float, row>  row4){
-    for (int i = 0; i < 4; ++i) {
-        mat4[0][i] = row1[i];
-        mat4[1][i] = row2[i];
-        mat4[2][i] = row3[i];
-        mat4[3][i] = row4[i];
-    }
-}
 Mat4::Mat4() {
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < colum; j++)
         {
             mat4[i][j] = 0.0f;
+        }
+    }
+}
+Mat4::Mat4(array<array<float, 4>, 4> initMat)
+{
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < colum; j++)
+        {
+            mat4[i][j] = initMat[i][j];
         }
     }
 }

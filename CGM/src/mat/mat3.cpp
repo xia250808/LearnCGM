@@ -13,7 +13,17 @@ Mat3::Mat3() {
             mat[i][j] = 0.0f;
         }
     }
-};
+}
+Mat3::Mat3(array<array<float, 3>, 3> initMat)
+{
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < colum; j++)
+        {
+            mat[i][j] = initMat[i][j];
+        }
+    }
+}
 
 void Mat3::print(const std::string& str) {
     std::cout << "Mat3: " << str << endl;

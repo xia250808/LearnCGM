@@ -7,7 +7,7 @@
 int main() {
     std::cout << "START TEST..." << std::endl;
     //mat4_test::test_mat4_multiplication();
-    eul_test::print_test();
+    transRotation_test::tests();
     std::cout << "TEST  END" << std::endl;
     return 0;
 }

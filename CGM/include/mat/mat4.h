@@ -10,8 +10,7 @@ public:
     float mat4[4][4];
     static const int row = 4, colum = 4;
     Mat4();
-    Mat4(std::array<float,row> row1, std::array<float, row> row2,
-        std::array<float, row>  row3, std::array<float, row>  row4);
+    Mat4(array<array<float,4>,4> initMat);
     float get(int row, int colum) {
         return mat4[row][colum];
     }

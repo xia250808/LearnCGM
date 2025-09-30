@@ -23,6 +23,7 @@ public:
     const float epsilon = 1e-6f;
 
     Mat3();
+    Mat3(array<array<float, 3>, 3> initMat);
     void set(int row, int colum, float value);
     float get(int row, int colum) const;
     std::array<float,row> getColumItems(int coum)const;
