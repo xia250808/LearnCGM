@@ -29,7 +29,12 @@ public:
 		Mat3A.transToEul().print();
 		eulA.print();
 	}
-
+	static void eul_mat_quater_test() {
+		Eul eulA = Eul(glm::radians(65.0f), glm::radians(24.0f), glm::radians(42.0f));
+		Eul eulB = eulA.transToMat3().transToQuater().transToEul();
+		std:string isEqual = (eulA == eulB) ? "equal" : "no euqal";
+		cout << "eul->mat3->quater->eul|" << isEqual << " |eul" << endl;
+	}
 
 
 	static void eul_quater_mat_test() {
@@ -51,9 +56,10 @@ public:
 	}
 
 	static void tests() {
-		eul_mat3_test();
+		/*eul_mat3_test();
 		eul_quater_mat_test();
-		eul_quater_test();
+		eul_quater_test();*/
+		eul_mat_quater_test();
 
 	}
 };
