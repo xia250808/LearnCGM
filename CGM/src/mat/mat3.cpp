@@ -1,6 +1,7 @@
 ﻿#include <cmath>
 #include <array>
 #include "mat/mat3.h"
+#include "quater/quater.h"
 #include <numbers>
 
 using namespace std;
@@ -13,7 +14,17 @@ Mat3::Mat3() {
             mat[i][j] = 0.0f;
         }
     }
-};
+}
+Mat3::Mat3(array<array<float, 3>, 3> initMat)
+{
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < colum; j++)
+        {
+            mat[i][j] = initMat[i][j];
+        }
+    }
+}
 
 void Mat3::print(const std::string& str) {
     std::cout << "Mat3: " << str << endl;
@@ -41,20 +52,15 @@ std::array<float, 3> Mat3::getColumItems(int colum)const {
 }
 
 bool Mat3::operator==(const Mat3& other) const {
-    bool isEqual = true;
     for (int i = 0; i < Mat3::row; i++)
     {
         for (int j = 0; j < Mat3::colum; j++)
         {
-            isEqual = fabs(mat[i][j] - other.mat[i][j]) < Mat3::epsilon;
-            if (!isEqual)
-            {
-                return isEqual;
-            }
+            if (fabs(mat[i][j] - other.mat[i][j]) > Mat3::epsilon) return false;
         }
 
     }
-    return isEqual;
+    return true;
 }
 
 float Mat3::getMat3Determinant() {
@@ -66,6 +72,65 @@ float Mat3::getMat3Determinant() {
     float c02 = mat[0][2] * get2x2Determinant(M02);
     float determinant = c00 + c01 + c02;
     return determinant;
+}
+
+Quater Mat3::transToQuater() {
+    float w, x, y, z;
+    float _w, _x, _y,_z;
+    _w = mat[0][0] + mat[1][1] + mat[2][2];
+    _x = mat[0][0] - mat[1][1] - mat[2][2];
+    _y = -mat[0][0] + mat[1][1] - mat[2][2];
+    _z = -mat[0][0] - mat[1][1] + mat[2][2];
+
+    float  maxNum = _w;
+    int maxNumIndex = 0;
+    if (_x > maxNum)
+    {
+        maxNum = _x;
+        maxNumIndex = 1;
+    }
+    if (_y > maxNum)
+    {
+        maxNum = _y;
+        maxNumIndex = 2;
+    }
+    if (_z > maxNum)
+    {
+        maxNum = _z;
+        maxNumIndex = 3;
+    }
+
+    float biggestVal = sqrt(maxNum + 1) * 0.5f;
+    float mult = 0.25f / biggestVal;
+
+    switch(maxNumIndex){
+    case 0:
+        w = biggestVal;
+        x = (mat[1][2] - mat[2][1]) * mult;
+        y = (mat[2][0] - mat[0][2]) * mult;
+        z = (mat[0][1] - mat[1][0]) * mult;
+        break;
+    case 1:
+        x = biggestVal;
+        w = (mat[1][2] - mat[2][1]) * mult;
+        y = (mat[0][1] - mat[1][0]) * mult;
+        z = (mat[2][0] - mat[0][2]) * mult;
+        break;
+    case 2:
+        y = biggestVal;
+        w = (mat[2][0] - mat[0][2]) * mult;
+        x = (mat[0][1] - mat[1][0]) * mult;
+        z = (mat[1][2] - mat[2][1]) * mult;
+        break;
+    case 3:
+        z = biggestVal;
+        w = (mat[0][1] - mat[1][0]) * mult;
+        x = (mat[2][0] - mat[0][2]) * mult;
+        y = (mat[1][2] - mat[2][1]) * mult;
+        break;
+    }
+
+    return Quater({ w,x,y,z });
 }
 
 Eul Mat3::transToEul() {

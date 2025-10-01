@@ -56,3 +56,25 @@ Mat3 Eul::transToMat3() {
 	return retMat3;
 
 }
+
+Quater Eul::transToQuater()
+{	
+	float p = normalize_angle(pitch);
+	float y = normalize_angle(yaw);
+	float r = normalize_angle(roll);
+	float cy2 = cosf(y / 2.0), sy2 = sinf(y / 2.0);
+	float cp2 = cosf(p / 2.0), sp2 = sinf(p / 2.0);
+	float cr2 = cosf(r / 2.0), sr2 = sinf(r / 2.0);
+	Quater retQuater = Quater();
+	retQuater.w = cy2 * cp2 * cr2 + sy2 * sp2 * sr2;
+	retQuater.x = cy2 * sp2 * cr2 + sy2 * cp2 * sr2;
+	retQuater.y = sy2 * cp2 * cr2 - cy2 * sp2 * sr2;
+	retQuater.z = cy2 * cp2 * sr2 - sy2 * sp2 * cr2;
+
+	return retQuater;
+}
+
+bool Eul::operator==(const Eul& other)
+{
+	return fabs(pitch - other.pitch) < 1e-6f && fabs(yaw - other.yaw) < 1e-6f && fabs(roll - other.roll) < 1e-6f;
+}
